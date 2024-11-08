@@ -19,13 +19,29 @@ To get started with the Talktime App, follow these steps:
    ```bash
    cd talktime-app
    ```
-3. Install dependencies:
+3. Install pnpm (if not already installed):
    ```bash
-   npm install
+   npm install -g pnpm
    ```
-4. Start the development server:
+4. Install dependencies:
    ```bash
-   npm start
+   pnpm install
+   pnpm postinstall
+   ```
+5. Initialize and update the submodule server:
+   ```bash
+   git submodule update --init --recursive
+   ```
+6. Add environment variables:
+   - Create a `.env` file in the root directory and add the necessary variables.
+   - Create a `.env` file in the `server` directory and add the necessary variables.
+7. Run client on port 3000:
+   ```bash
+   pnpm client
+   ```
+8. Run server on port 5100:
+   ```bash
+   pnpm server
    ```
 
 ## Usage
