@@ -23,22 +23,39 @@ async function getUsersByRoom(roomId) {
 }
 
 export default async function getRecentMeetingData(user, setMeetings) {
-  // get recent meetings of user
   try {
     const roomsByUser = await getRoomsByUser(user.id);
-    const temp = [];
-    const len = await roomsByUser.length;
-    return roomsByUser.forEach(async (room) => {
-      const usersByRoom = await getUsersByRoom(room.roomId);
-      const dict = {
-        ...room,
-        users: await usersByRoom.filter((u) => u.email !== user.email),
-      };
+    const temp = await Promise.all(
+      roomsByUser.map(async (room) => {
+        const usersByRoom = await getUsersByRoom(room.roomId);
+        const filteredUsers = usersByRoom.filter((u) => u.email !== user.email);
+        return { ...room, users: filteredUsers };
+      })
+    );
 
-      temp.push(await dict);
-      if (len === temp.length) setMeetings(temp);
-    });
+    setMeetings(temp);
   } catch (e) {
-    console.error(e);
+    console.error("Error fetching recent meeting data:", e);
   }
 }
+
+// export default async function getRecentMeetingData(user, setMeetings) {
+//   // get recent meetings of user
+//   try {
+//     const roomsByUser = await getRoomsByUser(user.id);
+//     const temp = [];
+//     const len = await roomsByUser.length;
+//     return roomsByUser.forEach(async (room) => {
+//       const usersByRoom = await getUsersByRoom(room.roomId);
+//       const dict = {
+//         ...room,
+//         users: await usersByRoom.filter((u) => u.email !== user.email),
+//       };
+
+//       temp.push(await dict);
+//       if (len === temp.length) setMeetings(temp);
+//     });
+//   } catch (e) {
+//     console.error(e);
+//   }
+// }

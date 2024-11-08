@@ -3,5 +3,5 @@ module.exports = {
     process.env.NODE_ENV === 'production'
       ? 'client-url'
       : 'http://localhost:3000',
-  server: 'server-url',
+  server: 'http://localhost:5100',
 };

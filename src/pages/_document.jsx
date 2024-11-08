@@ -25,7 +25,7 @@ class MyDocument extends Document {
             <img
               src='https://queue.simpleanalyticscdn.com/noscript.gif'
               alt=''
-              referrerpolicy='no-referrer-when-downgrade'
+              referrerPolicy='no-referrer-when-downgrade'
             />
           </noscript>
           <Main />
