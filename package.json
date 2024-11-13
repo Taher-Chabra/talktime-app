@@ -5,7 +5,6 @@
     "dev": "NODE_OPTIONS=--openssl-legacy-provider next dev",
     "build": "NODE_OPTIONS=--openssl-legacy-provider next build",
     "start": "NODE_OPTIONS=--openssl-legacy-provider next start",
-    "postinstall": "cd server && npm i",
     "client": "NODE_OPTIONS=--openssl-legacy-provider next dev",
     "server": "cd ./server && npm start"
   },
