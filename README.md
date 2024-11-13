@@ -26,7 +26,8 @@ To get started with the Talktime App, follow these steps:
 4. Install dependencies:
    ```bash
    pnpm install
-   pnpm postinstall
+   cd server
+   pnpm install
    ```
 5. Initialize and update the submodule server:
    ```bash
