@@ -1,7 +1,7 @@
 import { allowedChars } from '@/lib/utils';
 
 module.exports = {
-  allowedURLs: ['http://localhost:5100', 'server-url'],
+  allowedURLs: ['http://localhost:5100', 'https://talktime-server-16uu.onrender.com'],
   virtualBackgroundImages: {
     beach: '/twilio-video-processor/backgrounds/beach.jpg',
     bokeh: '/twilio-video-processor/backgrounds/bokeh.jpg',

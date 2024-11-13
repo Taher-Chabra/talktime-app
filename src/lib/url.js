@@ -1,6 +1,6 @@
 module.exports = {
   client: process.env.NODE_ENV === 'production'
-      ? 'client-url'
+      ? 'https://talktime-app.onrender.com'
       : 'http://localhost:3000',
 
   server: process.env.NODE_ENV === 'production'
