@@ -1,13 +1,17 @@
 import mongoose from 'mongoose';
 
 export async function dbConnect() {
+  // If already connected, return the existing connection
   if (mongoose.connection.readyState >= 1) return;
 
-  return mongoose.connect(process.env.DB_CONN_STR, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: true,
-  });
+  // Connect to MongoDB
+  return mongoose.connect(process.env.DB_CONN_STR)
+    .then(() => {
+      console.log('Connected to MongoDB');
+    })
+    .catch((error) => {
+      console.error('MongoDB connection error:', error);
+    });
 }
 
 export default async function dbMiddleware(req, res, next) {
