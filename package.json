@@ -2,10 +2,10 @@
   "name": "talktime_app",
   "private": true,
   "scripts": {
-    "dev": "NODE_OPTIONS=--openssl-legacy-provider next dev",
-    "build": "NODE_OPTIONS=--openssl-legacy-provider next build",
-    "start": "NODE_OPTIONS=--openssl-legacy-provider next start",
-    "client": "NODE_OPTIONS=--openssl-legacy-provider next dev",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "client": "next dev",
     "server": "cd ./server && npm start"
   },
   "dependencies": {
