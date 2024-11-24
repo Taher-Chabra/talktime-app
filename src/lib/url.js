@@ -5,7 +5,7 @@ module.exports = {
 
     server: 'https://talktime-server-16uu.onrender.com'
 
+};
 //   server: process.env.NODE_ENV === 'production'
 //       ? 'https://ws.msft.lohani.dev'
 //       : 'http://localhost:5100',
-};
