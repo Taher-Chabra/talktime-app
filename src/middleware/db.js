@@ -17,7 +17,7 @@ export async function dbConnect() {
 export default async function dbMiddleware(req, res, next) {
   try {
     if (!global.mongoose) {
-      global.mongoose = dbConnect();
+      global.mongoose = await dbConnect();
     }
   } catch (e) {
     console.error(e);

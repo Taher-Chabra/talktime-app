@@ -4,8 +4,6 @@ import classNames from "classnames";
 
 import LayoutNoFooter from "@/components/Layout/LayoutNoFooter";
 import Participant from "@/components/Participant/Participant";
-import Header from "@/components/Header/Header";
-import Head from "@/components/Head/Head";
 import ChatPanel from "@/components/Panels/ChatPanel";
 import CallFooter from "@/components/Footer/CallFooter";
 import { useRoomContext } from "@/context/RoomContext";

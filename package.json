@@ -2,10 +2,10 @@
   "name": "talktime_app",
   "private": true,
   "scripts": {
-    "dev": "NODE_OPTIONS=--openssl-legacy-provider next dev",
-    "build": "NODE_OPTIONS=--openssl-legacy-provider next build",
-    "start": "NODE_OPTIONS=--openssl-legacy-provider next start",
-    "client": "NODE_OPTIONS=--openssl-legacy-provider next dev",
+    "dev": "cross-env NODE_OPTIONS=--openssl-legacy-provider next dev", 
+    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider next build",
+    "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider next start",
+    "client": "cross-env NODE_OPTIONS=--openssl-legacy-provider next dev",
     "server": "cd ./server && npm start"
   },
   "dependencies": {
@@ -32,6 +32,7 @@
   "devDependencies": {
     "@types/twilio-video": "^2.11.0",
     "autoprefixer": "^10.2.6",
+    "cross-env": "^7.0.3",
     "nodemon": "^2.0.9",
     "postcss": "^8.3.5",
     "tailwindcss": "^2.2.4"

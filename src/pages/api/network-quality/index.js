@@ -9,7 +9,6 @@ handler.get(async (req, res) => {
   if (!req.query.roomId) return;
   try {
     const result = await NetworkQuality.find({ roomId: req.query.roomId });
-    // console.log(result);
     res.json(result);
   } catch (e) {
     console.error(e);

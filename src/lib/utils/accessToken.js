@@ -11,7 +11,7 @@ export default async function getToken(roomId, identity) {
       }),
       headers: {
         'Content-Type': 'application/json',
-      },
+      }
     });
 
     const jsonData = await data.json();
