@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { getSession } from 'next-auth/client';
+import { getSession } from 'next-auth/react';
 import { IoVideocam, IoChatboxEllipses } from 'react-icons/io5';
 import { CgSpinner } from 'react-icons/cg';
 import { AiFillClockCircle } from 'react-icons/ai';
 import classNames from 'classnames';
-import Tooltip from '@material-ui/core/Tooltip';
+import Tooltip from '@mui/material/Tooltip';
 
 import Layout from '@/components/Layout/Layout';
 import getRecentMeetingData from '@/lib/utils/dashboardData';
@@ -12,28 +12,19 @@ import { alerts } from '@/lib';
 import { validateRoomName, formattedDateString, sortByDate } from '@/lib/utils';
 
 export async function getServerSideProps(context) {
-  // fetch the next-auth user session
-  try {
-    const { req } = context;
-    const session = await getSession({ req });
+  const session = await getSession(context);
 
-    if (session) {
-      return {
-        props: {
-          user: session.user,
-        },
-      };
-    }
-  } catch (e) {
-    console.error(e);
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/auth/login',
+        permanent: false,
+      },
+    };
   }
 
-  // user not logged in, redirect to /login page
   return {
-    redirect: {
-      destination: '/auth/login',
-      permanent: false,
-    },
+    props: { user: session.user },
   };
 }
 

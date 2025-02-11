@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Snackbar } from '@material-ui/core';
+import { Snackbar } from '@mui/material';
 import { MdContentCopy } from 'react-icons/md';
 import { IoCloseOutline, IoSendSharp, IoVideocam } from 'react-icons/io5';
 import { AiOutlineHistory } from 'react-icons/ai';

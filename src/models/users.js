@@ -1,4 +1,3 @@
-import { ObjectId } from 'bson';
 import mongoose, { Schema } from 'mongoose';
 
 const MODEL_NAME = 'User';
@@ -6,7 +5,8 @@ const MODEL_NAME = 'User';
 export const userSchema = new Schema(
   {
     _id: {
-      type: ObjectId,
+      type: String,
+      required: true,
     },
     name: {
       type: String,

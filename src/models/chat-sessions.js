@@ -1,4 +1,3 @@
-import { ObjectId } from 'bson';
 import mongoose, { Schema } from 'mongoose';
 
 const MODEL_NAME = 'ChatSession';
@@ -6,7 +5,7 @@ const MODEL_NAME = 'ChatSession';
 export const messageSchema = new Schema({
   user: {
     name: String,
-    id: ObjectId,
+    id: String,
     color: String,
     email: String,
     image: String,

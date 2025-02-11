@@ -1,10 +1,13 @@
 import mongoose, { Schema } from 'mongoose';
-import { ObjectId } from 'bson';
+import { ObjectId } from 'mongodb';
 
 const MODEL_NAME = 'UserRoom';
 
 export const userRoomSchema = new Schema({
-  userId: ObjectId,
+  userId: { 
+    type: String,
+    required: true 
+  },
   rooms: [
     {
       roomId: String,

@@ -1,33 +1,28 @@
 import React from 'react';
-import { getSession } from 'next-auth/client';
+import { getSession } from 'next-auth/react';
 
 import Placeholder from '@/components/Layout/Placeholder';
 import { generateCallID } from '@/lib/utils';
 import Head from '@/components/Head/Head';
 
 export async function getServerSideProps(context) {
-  // fetch the next-auth user session
-  try {
-    const { req, query } = context;
-    const session = await getSession({ req });
+  const { query } = context;
+  const session = await getSession(context);
 
-    if (session) {
-      const roomId = query.name ? query.name : generateCallID();
-      return {
-        redirect: {
-          destination: `/room/${roomId}`,
-          permanent: false,
-        },
-      };
-    }
-  } catch (e) {
-    console.error(e);
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/auth/login',
+        permanent: false,
+      },
+    };
   }
 
-  // user not logged in, redirect to /login page
+  const roomId = query.name || generateCallID();
+
   return {
     redirect: {
-      destination: '/auth/login',
+      destination: `/room/${roomId}`,
       permanent: false,
     },
   };

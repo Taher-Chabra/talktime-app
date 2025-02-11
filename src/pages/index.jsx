@@ -1,10 +1,10 @@
 import React from 'react';
-import { useSession } from 'next-auth/client';
+import { useSession } from 'next-auth/react';
 
 import Layout from '@/components/Layout/Layout';
 
 export default function Index() {
-  const [session] = useSession();
+  const { data: session } = useSession();
 
   return (
     <Layout title='Talktime App'>

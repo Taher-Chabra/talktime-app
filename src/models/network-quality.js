@@ -1,11 +1,13 @@
 import mongoose, { Schema } from 'mongoose';
-import { ObjectId } from 'bson';
 
 const MODEL_NAME = 'NetworkQuality';
 
 export const networkQualitySchema = new Schema({
   roomId: String,
-  userId: ObjectId,
+  userId: {
+    type: String,
+    required: true,
+  },
   networkQualityLevel: Number,
   audioRecv: Number,
   audioSend: Number,

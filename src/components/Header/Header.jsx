@@ -1,11 +1,12 @@
 import React from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 import { PiWechatLogo } from "react-icons/pi";
-import { signIn, signOut, useSession } from 'next-auth/client';
+import { signIn, signOut, useSession } from 'next-auth/react';
 
 export default function Header() {
-  const [session, loading] = useSession();
-
+  const { data: session, status } = useSession();
+  const loading = status === "loading";
+ 
   return (
     <header className='bg-gray-900 border-b border-gray-950 sticky h-20'>
       <div className='wrapper flex flex-row justify-between py-3 items-center'>

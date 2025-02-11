@@ -14,7 +14,7 @@ import { MdPresentToAll } from 'react-icons/md';
 import { BackgroundIcon } from '@/components/CustomIcons/CustomIcons';
 import classNames from 'classnames';
 import { LocalVideoTrack } from 'twilio-video';
-import Tooltip from '@material-ui/core/Tooltip';
+import Tooltip from '@mui/material/Tooltip';
 
 import { useRoomContext } from '@/context/RoomContext';
 import { useSocketContext } from '@/context/SocketContext';

@@ -3,7 +3,7 @@ import GoogleProvider from "next-auth/providers/google";
 import GitHubProvider from "next-auth/providers/github";
 import { assignRandomColor } from '@/lib/utils';
 
-const options = {
+const authOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
@@ -14,22 +14,25 @@ const options = {
       clientSecret: process.env.GITHUB_SECRET,
     }),
   ],
-  database: process.env.DB_CONN_STR,
   pages: {
     signIn: '/auth/login',
   },
   callbacks: {
-    redirect: async (url, baseUrl) => {
-      return url.startsWith(baseUrl)
-        ? Promise.resolve(url)
-        : Promise.resolve(baseUrl);
+    async redirect({ url, baseUrl }) {
+      return url.startsWith(baseUrl) ? url : baseUrl;
     },
-    session: async (session, token) => {
-      session.user.id = token.id;
-      session.user.color = assignRandomColor(`${token.id}`);
+    async session({ session, token }) {
+      session.user.id = token.sub;
+      session.user.color = assignRandomColor(`${token.sub}`);
       return session;
     },
+    async jwt({ token, user }) {
+      if (user) {
+        token.sub = user.id;
+      }
+      return token;
+    }
   },
 };
 
-export default (req, res) => NextAuth(req, res, options);
+export default NextAuth(authOptions);

@@ -4,7 +4,10 @@ import { userSchema } from './users';
 const MODEL_NAME = 'Room';
 
 export const roomSchema = new Schema({
-  roomId: String,
+  roomId: {
+    type: String,
+    required: true,
+  },
   users: [userSchema],
 });
 

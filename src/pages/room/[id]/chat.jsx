@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { IoSendSharp, IoInformationCircle } from 'react-icons/io5';
-import { getSession } from 'next-auth/client';
+import { getSession } from 'next-auth/react';
 
 import LayoutNoFooter from '@/components/Layout/LayoutNoFooter';
 import ChatSessionPanel from '@/components/Panels/ChatSessionPanel';
@@ -11,29 +11,24 @@ import { formattedDateString } from '@/lib/utils';
 
 export async function getServerSideProps(context) {
   // fetch the next-auth user session
-  try {
-    const { req, query } = context;
-    const session = await getSession({ req });
-
-    if (session) {
-      const roomId = query.id;
-
-      return {
-        props: {
-          roomId,
-          user: session.user,
-        },
-      };
-    }
-  } catch (e) {
-    console.error(e);
-  }
+  const { query } = context;
+  const session = await getSession(context);
+  const roomId = query.id;
 
   // user not logged in, redirect to /login page
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/auth/login',
+        permanent: false,
+      },
+    };
+  }
+  
   return {
-    redirect: {
-      destination: '/auth/login',
-      permanent: false,
+    props: {
+      roomId,
+      user: session.user,
     },
   };
 }

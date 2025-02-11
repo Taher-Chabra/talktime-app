@@ -1,10 +1,37 @@
 import React from 'react';
-import { signIn, getSession, getProviders } from 'next-auth/client';
+import { signIn, getSession, getProviders } from 'next-auth/react';
 import { SiGoogle, SiGithub } from 'react-icons/si';
 import { PiWechatLogo } from "react-icons/pi";
 import url from '@/lib/url';
 
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+
+  if (session) {
+    // if user is already logged in, redirect to /dashboard
+    return {
+      redirect: {
+        destination: '/dashboard',
+        permanent: false,
+      },
+    };
+  }
+
+  const providers = await getProviders();
+
+  return {
+    props: { providers, callbackUrl: `${url.client}/dashboard` },
+  };
+}
+
 export default function Login({ providers, callbackUrl }) {
+
+  const handleSignIn = (providerId) => {
+    if (providerId) {
+      signIn(providerId, { callbackUrl });
+    }
+  };
+  
   return (
     <main className='bg-gray-900 flex flex-col items-center h-screen space-y-8 justify-center text-gray-200'>
       <div className='flex flex-col items-center space-y-4'>
@@ -21,18 +48,14 @@ export default function Login({ providers, callbackUrl }) {
         <div className='flex flex-col space-y-4'>
           <button
             className='btn'
-            onClick={() =>
-              signIn(providers.github.id, {
-                callbackUrl,
-              })
-            }
+            onClick={() => handleSignIn(providers?.github?.id)}
           >
             <SiGithub className='btn-icon' />
             Sign in with GitHub
           </button>
           <button
             className='btn'
-            onClick={() => signIn(providers.google.id, { callbackUrl })}
+            onClick={() => handleSignIn(providers?.google?.id)}
           >
             <SiGoogle className='btn-icon' />
             Sign in with Google
@@ -41,28 +64,4 @@ export default function Login({ providers, callbackUrl }) {
       </div>
     </main>
   );
-}
-
-export async function getServerSideProps(context) {
-  try {
-    const { req } = context;
-    const session = await getSession({ req });
-    if (session) {
-      // if user is already logged in, redirect to /dashboard
-      return {
-        redirect: {
-          destination: '/dashboard',
-          permanent: false,
-        },
-      };
-    }
-  } catch (e) {
-    console.error(e);
-  }
-
-  const providers = await getProviders();
-
-  return {
-    props: { providers, callbackUrl: `${url.client}/dashboard` },
-  };
 }

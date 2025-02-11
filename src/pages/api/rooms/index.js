@@ -18,7 +18,7 @@ handler.get(async (req, res) => {
   }
 
   try {
-    const usersInRoom = await Room.findOne({ roomId: req.query.roomId });
+    const usersInRoom = await Room.findOne({ roomId: req.query.roomId});
 
     if (usersInRoom) {
       res.json(usersInRoom.users);

@@ -1,4 +1,4 @@
-import { Provider } from 'next-auth/client';
+import { SessionProvider } from 'next-auth/react';
 
 import '@/styles/tailwind.css';
 import '@/styles/globals.css';
@@ -10,7 +10,7 @@ import { BackgroundContextProvider } from '@/context/BackgroundContext';
 
 function Application({ Component, pageProps }) {
   return (
-    <Provider session={pageProps.session}>
+    <SessionProvider session={pageProps.session}>
       <SocketContextProvider>
         <RoomContextProvider>
           <BackgroundContextProvider>
@@ -18,7 +18,7 @@ function Application({ Component, pageProps }) {
           </BackgroundContextProvider>
         </RoomContextProvider>
       </SocketContextProvider>
-    </Provider>
+    </SessionProvider>
   );
 }
 
